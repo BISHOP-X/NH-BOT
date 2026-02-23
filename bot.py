@@ -1,8 +1,12 @@
 import os
 import logging
+from dotenv import load_dotenv
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from downloader import NHentaiDownloader
+
+# Load .env file if it exists (used in Termux/local)
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
