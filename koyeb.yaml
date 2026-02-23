@@ -1,0 +1,21 @@
+name: nhpdf
+services:
+  - name: NH-BOT
+    type: worker
+    git:
+      repository: github.com/BISHOP-X/NH-BOT
+      branch: main
+    build:
+      buildpack:
+        build_command: pip install -r requirements.txt
+        run_command: python bot.py
+    env:
+      - key: TELEGRAM_API_ID
+        value: ""
+      - key: TELEGRAM_API_HASH
+        value: ""
+      - key: TELEGRAM_BOT_TOKEN
+        value: ""
+    instance_type: free
+    regions:
+      - was
