@@ -1,6 +1,6 @@
-# NHentai Telegram Bot
+# NH Telegram Bot
 
-A Telegram bot that downloads nhentai content and converts it to PDF files. Uses Pyrogram (MTProto) to support file uploads up to **2GB** (vs 50MB limit with standard Bot API).
+A Telegram bot that downloads NH content and converts it to PDF files. Uses Pyrogram (MTProto) to support file uploads up to **2GB** (vs 50MB limit with standard Bot API).
 
 ## Features
 
@@ -33,8 +33,7 @@ A Telegram bot that downloads nhentai content and converts it to PDF files. Uses
 
 ```bash
 # Clone/navigate to the project
-cd nhentai-downloader
-
+ cd NH-downloader
 # Install dependencies
 pip install -r requirements.txt
 
@@ -80,7 +79,7 @@ python bot.py
    - Connect your repository
    - Select the repository
    - Configure:
-     - **Name**: nhentai-telegram-bot
+     - **Name**: NH-telegram-bot
      - **Environment**: Python 3
      - **Build Command**: `pip install -r requirements.txt`
      - **Start Command**: `python bot.py`
@@ -104,10 +103,10 @@ python bot.py
 ## Project Structure
 
 ```
-nhentai-downloader/
+NH-downloader/
 ├── bot.py                 # Main Telegram bot (Pyrogram)
 ├── downloader.py          # Download logic & PDF conversion
-├── download nhentai.py    # Original CLI version
+├── download NH.py         # Original CLI version
 ├── requirements.txt       # Python dependencies
 ├── render.yaml           # Render deployment config
 ├── .env.example          # Environment variables template
@@ -135,7 +134,7 @@ Pyrogram uses the **MTProto protocol** (Telegram's native API), which allows:
 
 ### Render Configuration
 
-The bot is configured as a **Web Service** on Render:
+The bot is configured as a **Worker** on Render:
 - **Region**: Oregon (change in `render.yaml`)
 - **Plan**: Free tier (can upgrade for better performance)
 - **Auto-deploy**: Enabled (deploys on git push)
@@ -150,7 +149,7 @@ The bot is configured as a **Web Service** on Render:
 
 ### Download fails
 - Some codes may not exist or be invalid
-- Network issues with nhentai servers
+- Network issues with NH servers
 - Try changing DNS in `downloader.py`
 
 ### File too large error
@@ -187,4 +186,4 @@ MIT License - Use at your own risk
 
 ## Disclaimer
 
-This tool is for educational purposes. Ensure you comply with nhentai's terms of service and applicable laws in your jurisdiction.
+This tool is for educational purposes. Ensure you comply with NH's terms of service and applicable laws in your jurisdiction.
