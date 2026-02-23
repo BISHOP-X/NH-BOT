@@ -1,56 +1,28 @@
 #!/bin/bash
-# NH BOT - Termux One-Time Setup Script
-# Run this ONCE to install everything
+# NH BOT - Full Auto Setup (run once, bot starts on every phone boot)
 
-echo "========================================="
-echo "   NH PDF Bot - Termux Setup"
-echo "========================================="
-
-# Update packages
-echo "[1/6] Updating packages..."
-pkg update -y && pkg upgrade -y
-
-# Install required packages
-echo "[2/6] Installing Python and Git..."
-pkg install -y python git
-
-# Clone the repo
-echo "[3/6] Cloning bot repo..."
-git clone https://github.com/BISHOP-X/NH-BOT
-cd NH-BOT
-
-# Install Python dependencies
-echo "[4/6] Installing Python packages..."
+pkg update -y && pkg install -y python git termux-services
+git clone https://github.com/BISHOP-X/NH-BOT ~/NH-BOT
+cd ~/NH-BOT
 pip install -r requirements.txt
 
-# Create .env file with credentials
-echo "[5/6] Setting up credentials..."
-cat > .env << 'EOF'
+# Save credentials
+cat > ~/NH-BOT/.env << 'EOF'
 TELEGRAM_API_ID=31146988
 TELEGRAM_API_HASH=390cb38783524c22eeac03f7c686919e
 TELEGRAM_BOT_TOKEN=8513146174:AAHTAHnBZuS5uQMIygqVOnw5BfQrXvvZcgo
 EOF
 
-# Create start script
-echo "[6/6] Creating start script..."
-cat > start.sh << 'STARTEOF'
-#!/bin/bash
+# Setup auto-start on boot via Termux:Boot
+mkdir -p ~/.termux/boot
+cat > ~/.termux/boot/start-nhbot.sh << 'BOOTEOF'
+#!/data/data/com.termux/files/usr/bin/bash
 cd ~/NH-BOT
-echo "Starting NH PDF Bot..."
-python bot.py
-STARTEOF
-chmod +x start.sh
+python bot.py &
+BOOTEOF
+chmod +x ~/.termux/boot/start-nhbot.sh
 
 echo ""
-echo "========================================="
-echo "   Setup Complete!"
-echo "========================================="
-echo ""
-echo "To START the bot, run:"
-echo "   bash ~/NH-BOT/start.sh"
-echo ""
-echo "Or add shortcut - run this:"
-echo "   echo 'alias nhbot=\"bash ~/NH-BOT/start.sh\"' >> ~/.bashrc && source ~/.bashrc"
-echo ""
-echo "Then just type: nhbot"
-echo "========================================="
+echo "✅ DONE! Bot will now start automatically every time your phone boots."
+echo "➡️  Install Termux:Boot from F-Droid to activate auto-start."
+echo "➡️  Then restart your phone - bot will run in background forever."
