@@ -1,7 +1,7 @@
 #!/bin/bash
 # NH BOT - Full Auto Setup (run once, bot starts on every phone boot)
 
-pkg update -y && pkg install -y python git termux-services
+pkg update -y && pkg install -y python git termux-services libxml2 libxslt libjpeg-turbo
 git clone https://github.com/BISHOP-X/NH-BOT ~/NH-BOT
 cd ~/NH-BOT
 pip install -r requirements.txt
